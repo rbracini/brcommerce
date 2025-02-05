@@ -1,0 +1,1 @@
+INSERT INTO tb_user ("BIRTH_DATE","EMAIL","NAME","PASSWORD","PHONE")VALUES('1981-05-07','vitoria@gmail.com','Vitória da Conquista','12345','(11)98765-4321');
