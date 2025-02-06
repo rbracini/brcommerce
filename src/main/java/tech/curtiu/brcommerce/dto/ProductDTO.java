@@ -8,14 +8,17 @@ public class ProductDTO {
     private String name;
     private String description;
     private Double price;
-    private String imageUrl;
+    private String imgUrl;
+
+    public ProductDTO() {
+    }
 
     public ProductDTO(Product product) {
         this.id = product.getId();
         this.name = product.getName();
         this.description = product.getDescription();
         this.price = product.getPrice();
-        this.imageUrl = product.getImgUrl();
+        this.imgUrl = product.getImgUrl();
     }
 
     public Long getId() {
@@ -34,8 +37,28 @@ public class ProductDTO {
         return price;
     }
 
-    public String getImageUrl() {
-        return imageUrl;
+    public String getImgUrl() {
+        return imgUrl;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public void setPrice(Double price) {
+        this.price = price;
+    }
+
+    public void setImgUrl(String imgUrl) {
+        this.imgUrl = imgUrl;
     }
 
 }
