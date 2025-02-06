@@ -39,4 +39,17 @@ public class ProductService {
         return productMapper.toDTO(product);
     }
 
+    @Transactional
+    public ProductDTO update(Long id, ProductDTO dto) {
+        Product product = productRepository.getReferenceById(id);
+        productMapper.updateEntityFromDto(dto, product);
+        product = productRepository.save(product);
+        return productMapper.toDTO(product);
+    }
+
+    @Transactional
+    public void delete(Long id) {
+        productRepository.deleteById(id);
+    }
+
 }
