@@ -1,4 +1,4 @@
-package tech.curtiu.brcommerce.controller;
+package tech.curtiu.brcommerce.controllers;
 
 import java.util.List;
 

@@ -19,8 +19,8 @@ public class UserService {
     public List<UserMinDTO> findAll() {
         List<User> users = userRepository.findAll();
         return users.stream()
-                .map(user -> new UserMinDTO(user))
-                .collect(Collectors.toList());
+                .map(UserMinDTO::new)
+                .toList();
     }
 
 }
