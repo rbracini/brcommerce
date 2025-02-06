@@ -10,6 +10,7 @@ import tech.curtiu.brcommerce.dto.ProductDTO;
 import tech.curtiu.brcommerce.entities.Product;
 import tech.curtiu.brcommerce.mappers.ProductMapper;
 import tech.curtiu.brcommerce.repositories.ProductRepository;
+import tech.curtiu.brcommerce.services.exceptions.ResourceNotFoundException;
 
 @Service
 public class ProductService {
@@ -28,7 +29,8 @@ public class ProductService {
 
     @Transactional(readOnly = true)
     public ProductDTO findById(Long id) {
-        Product product = productRepository.findById(id).orElseThrow();
+        Product product = productRepository.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("Product not found"));
         return productMapper.toDTO(product);
     }
 
