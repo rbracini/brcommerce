@@ -3,6 +3,8 @@ package tech.curtiu.brcommerce.services;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -18,11 +20,9 @@ public class ProductService {
     ProductRepository productRepository;
 
     @Transactional(readOnly = true)
-    public List<ProductMinDTO> findAll() {
-        List<Product> products = productRepository.findAll();
-        return products.stream()
-                .map(ProductMinDTO::new)
-                .toList();
+    public Page<ProductDTO> findAll(Pageable pageable) {
+        Page<Product> products = productRepository.findAll(pageable);
+        return products.map(ProductDTO::new);
     }
 
     @Transactional(readOnly = true)
