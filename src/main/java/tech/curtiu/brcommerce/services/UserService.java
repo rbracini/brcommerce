@@ -3,11 +3,16 @@ package tech.curtiu.brcommerce.services;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.oauth2.jwt.Jwt;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
+import tech.curtiu.brcommerce.dto.UserDTO;
 import tech.curtiu.brcommerce.dto.UserMinDTO;
 import tech.curtiu.brcommerce.entities.Role;
 import tech.curtiu.brcommerce.entities.User;
@@ -39,6 +44,25 @@ public class UserService implements UserDetailsService {
         listUsers.forEach(x -> user.addRole(new Role(x.getRoleId(), x.getAuthority())));
 
         return user;
+    }
+
+    protected User authenticated() {
+
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        if (authentication.getPrincipal() instanceof Jwt jwtPrincipal) {
+            String username = jwtPrincipal.getClaim("username");
+            return userRepository.findByEmail(username)
+                    .orElseThrow(() -> new UsernameNotFoundException("User not found"));
+        } else {
+            throw new UsernameNotFoundException(
+                    "Invalid authentication principal type: " + authentication.getPrincipal().getClass().getName());
+        }
+
+    }
+
+    @Transactional(readOnly = true)
+    public UserDTO authenticatedUser() {
+        return new UserDTO(authenticated());
     }
 
 }

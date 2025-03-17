@@ -113,6 +113,10 @@ public class User implements UserDetails {
         return orders;
     }
 
+    public Set<Role> getRoles() {
+        return roles;
+    }
+
     @Override
     public int hashCode() {
         final int prime = 31;

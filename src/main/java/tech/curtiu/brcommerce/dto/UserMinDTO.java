@@ -8,10 +8,10 @@ public class UserMinDTO {
     private String email;
     private String name;
 
-    public UserMinDTO(User Entity) {
-        this.id = Entity.getId();
-        this.email = Entity.getEmail();
-        this.name = Entity.getName();
+    public UserMinDTO(User entity) {
+        id = entity.getId();
+        email = entity.getEmail();
+        name = entity.getName();
     }
 
     public Long getId() {
