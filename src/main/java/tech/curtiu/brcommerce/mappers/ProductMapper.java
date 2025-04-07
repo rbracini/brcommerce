@@ -6,14 +6,15 @@ import org.mapstruct.MappingTarget;
 import org.mapstruct.factory.Mappers;
 
 import tech.curtiu.brcommerce.dto.ProductDTO;
+import tech.curtiu.brcommerce.dto.ProductMinDTO;
 import tech.curtiu.brcommerce.entities.Product;
 
 @Mapper(componentModel = "spring")
 public interface ProductMapper {
 
-    ProductMapper INSTANCE = Mappers.getMapper(ProductMapper.class);
-
     ProductDTO toDTO(Product product);
+
+    ProductMinDTO toMinDTO(Product product);
 
     Product toEntity(ProductDTO productDTO);
 

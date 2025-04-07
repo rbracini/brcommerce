@@ -9,6 +9,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import jakarta.persistence.EntityNotFoundException;
 import tech.curtiu.brcommerce.dto.ProductDTO;
+import tech.curtiu.brcommerce.dto.ProductMinDTO;
 import tech.curtiu.brcommerce.entities.Product;
 import tech.curtiu.brcommerce.mappers.ProductMapper;
 import tech.curtiu.brcommerce.repositories.ProductRepository;
@@ -19,15 +20,15 @@ import tech.curtiu.brcommerce.services.exceptions.ResourceNotFoundException;
 public class ProductService {
 
     @Autowired
-    ProductRepository productRepository;
+    private ProductRepository productRepository;
 
     @Autowired
-    ProductMapper productMapper;
+    private ProductMapper productMapper;
 
     @Transactional(readOnly = true)
-    public Page<ProductDTO> searchByName(Pageable pageable, String name) {
+    public Page<ProductMinDTO> searchByName(Pageable pageable, String name) {
         Page<Product> products = productRepository.searchByName(pageable, name);
-        return products.map(productMapper::toDTO);
+        return products.map(productMapper::toMinDTO);
     }
 
     @Transactional(readOnly = true)

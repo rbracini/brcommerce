@@ -20,6 +20,7 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import jakarta.validation.Valid;
 import tech.curtiu.brcommerce.dto.ProductDTO;
+import tech.curtiu.brcommerce.dto.ProductMinDTO;
 import tech.curtiu.brcommerce.services.ProductService;
 
 @RestController
@@ -27,10 +28,10 @@ import tech.curtiu.brcommerce.services.ProductService;
 public class ProductController {
 
     @Autowired
-    ProductService productService;
+    private ProductService productService;
 
     @GetMapping
-    public ResponseEntity<Page<ProductDTO>> searchAllByName(Pageable pageable,
+    public ResponseEntity<Page<ProductMinDTO>> searchAllByName(Pageable pageable,
             @RequestParam(name = "name", defaultValue = "") String name) {
         return ResponseEntity.ok(productService.searchByName(pageable, name));
     }
