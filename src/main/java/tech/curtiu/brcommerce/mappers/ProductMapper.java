@@ -9,7 +9,7 @@ import tech.curtiu.brcommerce.dto.ProductDTO;
 import tech.curtiu.brcommerce.dto.ProductMinDTO;
 import tech.curtiu.brcommerce.entities.Product;
 
-@Mapper(componentModel = "spring")
+@Mapper(componentModel = "spring", uses = CategoryMapper.class)
 public interface ProductMapper {
 
     ProductDTO toDTO(Product product);
