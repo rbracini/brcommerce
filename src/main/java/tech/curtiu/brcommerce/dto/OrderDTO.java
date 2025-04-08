@@ -4,6 +4,7 @@ import java.time.Instant;
 import java.util.ArrayList;
 import java.util.List;
 
+import jakarta.validation.constraints.NotEmpty;
 import tech.curtiu.brcommerce.entities.Order;
 import tech.curtiu.brcommerce.entities.OrderItem;
 import tech.curtiu.brcommerce.entities.OrderStatus;
@@ -16,6 +17,8 @@ public class OrderDTO {
 
     private CustomerDTO customer;
     private PaymentDTO payment;
+
+    @NotEmpty(message = "Deve ter pelo menos um item")
     private List<OrderItemDTO> items = new ArrayList<>();
 
     public OrderDTO() {
