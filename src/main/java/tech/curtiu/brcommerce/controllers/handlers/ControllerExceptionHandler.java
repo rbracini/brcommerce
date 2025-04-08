@@ -12,6 +12,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import tech.curtiu.brcommerce.dto.CustomError;
 import tech.curtiu.brcommerce.dto.ValidationError;
 import tech.curtiu.brcommerce.services.exceptions.DataIntegrityViolationException;
+import tech.curtiu.brcommerce.services.exceptions.ForbiddenException;
 import tech.curtiu.brcommerce.services.exceptions.ResourceNotFoundException;
 
 @ControllerAdvice
@@ -39,6 +40,14 @@ public class ControllerExceptionHandler {
         ValidationError err = new ValidationError(Instant.now(), status.value(), "Dados inválidos",
                 request.getRequestURI());
         e.getBindingResult().getFieldErrors().forEach(fe -> err.addError(fe.getField(), fe.getDefaultMessage()));
+        return ResponseEntity.status(status).body(err);
+    }
+
+    @ExceptionHandler(ForbiddenException.class)
+    public ResponseEntity<CustomError> forbidden(ForbiddenException e,
+            HttpServletRequest request) {
+        HttpStatus status = HttpStatus.FORBIDDEN;
+        CustomError err = new CustomError(Instant.now(), status.value(), e.getMessage(), request.getRequestURI());
         return ResponseEntity.status(status).body(err);
     }
 
