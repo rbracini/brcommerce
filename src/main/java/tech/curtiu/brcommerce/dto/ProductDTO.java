@@ -5,6 +5,7 @@ import java.util.List;
 
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Positive;
 import jakarta.validation.constraints.Size;
 import tech.curtiu.brcommerce.entities.Category;
@@ -21,6 +22,7 @@ public class ProductDTO {
     @Size(min = 10, message = "Descrição: deve ter no mínimo 10 caracteres")
     private String description;
 
+    @NotNull(message = "Campo Preço é obrigatório")
     @Positive(message = "Preço: deve ser um valor positivo")
     private Double price;
 
