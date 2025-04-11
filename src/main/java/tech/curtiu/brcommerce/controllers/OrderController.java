@@ -15,7 +15,6 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import jakarta.validation.Valid;
 import tech.curtiu.brcommerce.dto.OrderDTO;
-import tech.curtiu.brcommerce.dto.ProductDTO;
 import tech.curtiu.brcommerce.services.OrderService;
 
 @RestController
